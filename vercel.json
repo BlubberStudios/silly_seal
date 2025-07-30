@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "api/index.go": {
+      "runtime": "go1.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/silly_seal/(.*)",
+      "destination": "/api/index.go?path=$1"
+    },
+    {
+      "source": "/silly_seal",
+      "destination": "/api/index.go"
+    }
+  ]
+}
