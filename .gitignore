@@ -1,0 +1,7 @@
+# Ignore the api folder
+.claude/
+CLAUDE.md
+plan.md
+
+# Keep go.mod and go.sum
+# (they're not ignored by default)
