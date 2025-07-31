@@ -12,15 +12,11 @@ const (
 	clearScreen = "\033[2J\033[H"
 )
 
-// Selected 24 frames out of 187 total frames - optimized for Vercel deployment
+// Selected 24 frames out of 187 total frames
 var SealWiggleFrames = []string{
 	`⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⡀⣀⢀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⢰⢕⢗⢕⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⢝⢎⢗⡳⡕⣕⡄⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`,
-
-	// Additional 23 frames would go here...
-	// For brevity, I'll just include a sample and the structure
-	// In the actual deployment, you'd copy all frames from vercel_frames_compact.txt
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -38,8 +34,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		response := map[string]interface{}{
 			"animations": []string{"seal"},
-			"usage":      "curl https://your-deployment.vercel.app/silly_seal",
-			"example":    "curl https://your-deployment.vercel.app/silly_seal",
+			"usage":      "curl https://blubberstudios.com/silly_seal",
+			"example":    "curl https://blubberstudios.com/silly_seal",
 		}
 		json.NewEncoder(w).Encode(response)
 		return
@@ -91,11 +87,10 @@ func Handler(w http.ResponseWriter, r *http.Request) {
     <div class="container">
         <h1>🦭 Wiggling Seal Animation</h1>
         <p>Use curl to view the animated seal:</p>
-        <pre><code>curl https://your-deployment.vercel.app/silly_seal</code></pre>
+        <pre><code>curl https://blubberstudios.com/silly_seal</code></pre>
         <p>Or try:</p>
-        <pre><code>curl https://your-deployment.vercel.app/silly_seal/list</code></pre>
+        <pre><code>curl https://blubberstudios.com/silly_seal/list</code></pre>
         <p>Made with ❤️ inspired by parrot.live</p>
-        <p>🎯 24 frames selected from 187 total braille frames for optimal Vercel performance</p>
     </div>
 </body>
 </html>`
@@ -125,9 +120,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	// Animation loop with streaming
 	frameIndex := 0
-	maxDuration := 15 * time.Second // Limit for Vercel function timeout
+	maxDuration := 30 * time.Second // Limit animation time for serverless
 	startTime := time.Now()
-	ticker := time.NewTicker(120 * time.Millisecond) // Optimized timing
+	ticker := time.NewTicker(150 * time.Millisecond) // Slightly slower for web
 	defer ticker.Stop()
 
 	for {
@@ -141,7 +136,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			// Clear screen and display current frame
 			fmt.Fprint(w, clearScreen)
 			fmt.Fprint(w, SealWiggleFrames[frameIndex])
-			fmt.Fprint(w, "\n\n🦭 Wiggling braille seal! Press Ctrl+C to stop\n")
+			fmt.Fprint(w, "\n\n🦭 Wiggling seal! Press Ctrl+C to stop\n")
 
 			flusher.Flush()
 
